@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.atmosdatabasetest.data.Blend;
@@ -15,16 +16,16 @@ import java.util.List;
 public class BlendViewModel extends ViewModel {
 
     private BlendRepository mRepository;
-    private LiveData<List<Blend>> mAllBlends;
+    private MediatorLiveData<List<Blend>> blendList = new MediatorLiveData<>();
 
-    public BlendViewModel(@NonNull Application application) {
-        super(application);
-        mRepository = new BlendRepository(application);
-        mAllBlends = mRepository.getAllBlends();
+    BlendViewModel(BlendRepository blendRepository) {
+        this.mRepository = blendRepository;
+        LiveData<List<Blend>> liveBlendList = blendRepository.getBlends();
+        blendList.addSource(liveBlendList, blends -> blendList.setValue(blends));
     }
 
-    public LiveData<List<Blend>> getAllBlends() {
-        return mAllBlends;
+    public MediatorLiveData<List<Blend>> getAllBlends() {
+        return blendList;
     }
 
 }
