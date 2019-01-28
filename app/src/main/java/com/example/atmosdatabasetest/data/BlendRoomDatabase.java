@@ -6,11 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.Executors;
 
-@Database(entities = {Blend.class}, version = 1, exportSchema = false)
+@Database(entities = {Blend.class, SavedBlend.class}, version = 1, exportSchema = false)
+@TypeConverters(Converters.class)
 public abstract class BlendRoomDatabase extends RoomDatabase {
 
     public abstract BlendDao blendDao();
