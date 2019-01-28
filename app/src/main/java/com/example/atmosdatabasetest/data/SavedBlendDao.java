@@ -17,4 +17,13 @@ public interface SavedBlendDao {
     @Transaction
     @Query("SELECT * FROM blend_table")
     LiveData<List<Both>> getBoth();
+
+    @Query("SELECT * FROM saved_blends WHERE id = :savedBlendId")
+    LiveData<SavedBlend> getSavedBlend(long savedBlendId);
+
+    @Query("SELECT * FROM saved_blends")
+    LiveData<List<SavedBlend>> getSavedBlends();
+
+    @Query("SELECT * FROM saved_blends WHERE blend_id = :blendId")
+    LiveData<SavedBlend> getSavedBlendForBlend(String blendId);
 }
