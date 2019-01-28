@@ -13,10 +13,10 @@ public interface BlendDao {
     @Insert
     void insertAll(Blend... blends);
 
-    @Query("SELECT * FROM blend_table ORDER BY uid ASC")
+    @Query("SELECT * FROM blend_table ORDER BY id ASC")
     LiveData<List<Blend>> getAllBlends();
 
-    @Query("SELECT * FROM blend_table WHERE uid IN (:userIds)")
-    LiveData<List<Blend>> loadAllByIds(int[] userIds);
+    @Query("SELECT * FROM blend_table WHERE id  = :blendId")
+    LiveData<Blend> getBlend(String blendId);
 
 }
