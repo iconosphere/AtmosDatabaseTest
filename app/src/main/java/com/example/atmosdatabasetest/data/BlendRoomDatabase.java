@@ -16,6 +16,7 @@ import java.util.concurrent.Executors;
 public abstract class BlendRoomDatabase extends RoomDatabase {
 
     public abstract BlendDao blendDao();
+    public abstract SavedBlendDao savedBlendDao();
 
     private static BlendRoomDatabase INSTANCE;
 
